@@ -16,7 +16,7 @@ public class SmartClient {
     public static SmartClient Instance = new SmartClient();
 
     public void init() {
-        Logger.info(String.format("Starting up %s %s", BuildInfo.GetName(), BuildInfo.GetVersion()));
+        Logger.info(String.format("Starting up %s %s (%s)", BuildInfo.GetName(), BuildInfo.GetVersion(), BuildInfo.GetCommit()));
         // AAA
     }
 }
