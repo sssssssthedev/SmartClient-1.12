@@ -19,15 +19,15 @@ public class BuildInfo {
     }
 
     public static String GetName() {
-        return GetFromProperties("build.properties", "build.name");
+        return GetFromProperties("/build.properties", "build.name");
     }
 
     public static String GetVersion() {
-        return GetFromProperties("build.properties","build.version");
+        return GetFromProperties("/build.properties","build.version");
     }
 
     public static String GetCommit() {
-        return GetFromProperties("git.properties", "git.commit.id.abbrev");
+        return GetFromProperties("/git.properties", "git.commit.id.abbrev");
     }
 
 

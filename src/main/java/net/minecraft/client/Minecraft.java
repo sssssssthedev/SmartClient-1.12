@@ -578,7 +578,6 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         GlStateManager.loadIdentity();
         GlStateManager.matrixMode(5888);
         this.checkGLError("Startup");
-        SmartClient.getInstance().init();
         this.textureMapBlocks = new TextureMap("textures");
         this.textureMapBlocks.setMipmapLevels(this.gameSettings.mipmapLevels);
         this.renderEngine.loadTickableTexture(TextureMap.LOCATION_BLOCKS_TEXTURE, this.textureMapBlocks);
@@ -603,6 +602,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         GlStateManager.viewport(0, 0, this.displayWidth, this.displayHeight);
         this.effectRenderer = new ParticleManager(this.world, this.renderEngine);
         this.checkGLError("Post startup");
+        SmartClient.getInstance().init();
         this.ingameGUI = new GuiIngame(this);
 
         if (this.serverName != null)
@@ -686,7 +686,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
     private void createDisplay() throws LWJGLException
     {
         Display.setResizable(true);
-        Display.setTitle("Minecraft 1.12.2");
+        Display.setTitle("Client is starting up...");
 
         try
         {
