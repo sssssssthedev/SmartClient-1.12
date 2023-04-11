@@ -89,6 +89,11 @@ public class MCPViaPlatform implements ViaPlatform<UUID>
     }
 
     @Override
+    public PlatformTask runRepeatingAsync(Runnable runnable, long ticks) {
+        return new FutureTaskId(ViaMCP.getInstance().getEventLoop().scheduleAtFixedRate(() -> runAsync(runnable), 0, ticks * 50, TimeUnit.MILLISECONDS).addListener(errorLogger()));
+    }
+
+    @Override
     public FutureTaskId runSync(Runnable runnable)
     {
         return new FutureTaskId(ViaMCP.getInstance().getEventLoop().submit(runnable).addListener(errorLogger()));

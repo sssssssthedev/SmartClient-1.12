@@ -110,7 +110,7 @@ public class GuiProtocolSelector extends GuiScreen
         }
 
         @Override
-        protected void drawSlot(int i, int i1, int i2, int i3, int i4, int i5, float i6)
+        protected void func_192637_a(int i, int i1, int i2, int i3, int i4, int i5, float i6)
         {
             drawCenteredString(mc.fontRendererObj,(ViaMCP.getInstance().getVersion() == ProtocolCollection.values()[i].getVersion().getVersion() ? TextFormatting.GREEN.toString() + TextFormatting.BOLD : TextFormatting.GRAY.toString()) + ProtocolCollection.getProtocolById(ProtocolCollection.values()[i].getVersion().getVersion()).getName(), width / 2, i2 + 2, -1);
             GlStateManager.pushMatrix();

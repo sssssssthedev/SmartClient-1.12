@@ -202,6 +202,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import net.sssssssthedev.SmartClient.SmartClient;
+import net.sssssssthedev.SmartClient.ui.splash.SplashScreen;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
@@ -218,6 +219,7 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
+import viamcp.utils.AttackOrder;
 
 public class Minecraft implements IThreadListener, ISnooperInfo
 {
@@ -404,6 +406,8 @@ public class Minecraft implements IThreadListener, ISnooperInfo
     /** Profiler currently displayed in the debug screen pie chart */
     private String debugProfilerName = "root";
 
+    public SplashScreen splashScreen = new SplashScreen();
+
     public Minecraft(GameConfiguration gameConfig)
     {
         theMinecraft = this;
@@ -545,7 +549,8 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         this.refreshResources();
         this.renderEngine = new TextureManager(this.mcResourceManager);
         this.mcResourceManager.registerReloadListener(this.renderEngine);
-        this.drawSplashScreen(this.renderEngine);
+//        this.drawSplashScreen(this.renderEngine);
+        this.splashScreen.drawShader();
         this.skinManager = new SkinManager(this.renderEngine, new File(this.fileAssets, "skins"), this.sessionService);
         this.saveLoader = new AnvilSaveConverter(new File(this.mcDataDir, "saves"), this.dataFixer);
         this.mcSoundHandler = new SoundHandler(this.mcResourceManager, this.gameSettings);
@@ -963,59 +968,60 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         this.displayHeight = displaymode.getHeight();
     }
 
-    private void drawSplashScreen(TextureManager textureManagerInstance) throws LWJGLException
-    {
-        ScaledResolution scaledresolution = new ScaledResolution(this);
-        int i = scaledresolution.getScaleFactor();
-        Framebuffer framebuffer = new Framebuffer(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i, true);
-        framebuffer.bindFramebuffer(false);
-        GlStateManager.matrixMode(5889);
-        GlStateManager.loadIdentity();
-        GlStateManager.ortho(0.0D, (double)scaledresolution.getScaledWidth(), (double)scaledresolution.getScaledHeight(), 0.0D, 1000.0D, 3000.0D);
-        GlStateManager.matrixMode(5888);
-        GlStateManager.loadIdentity();
-        GlStateManager.translate(0.0F, 0.0F, -2000.0F);
-        GlStateManager.disableLighting();
-        GlStateManager.disableFog();
-        GlStateManager.disableDepth();
-        GlStateManager.enableTexture2D();
-        InputStream inputstream = null;
-
-        try
-        {
-            inputstream = this.mcDefaultResourcePack.getInputStream(LOCATION_MOJANG_PNG);
-            this.mojangLogo = textureManagerInstance.getDynamicTextureLocation("logo", new DynamicTexture(ImageIO.read(inputstream)));
-            textureManagerInstance.bindTexture(this.mojangLogo);
-        }
-        catch (IOException ioexception)
-        {
-            LOGGER.error("Unable to load logo: {}", LOCATION_MOJANG_PNG, ioexception);
-        }
-        finally
-        {
-            IOUtils.closeQuietly(inputstream);
-        }
-
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-        bufferbuilder.pos(0.0D, (double)this.displayHeight, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.pos((double)this.displayWidth, (double)this.displayHeight, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.pos((double)this.displayWidth, 0.0D, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
-        bufferbuilder.pos(0.0D, 0.0D, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
-        tessellator.draw();
-        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        int j = 256;
-        int k = 256;
-        this.draw((scaledresolution.getScaledWidth() - 256) / 2, (scaledresolution.getScaledHeight() - 256) / 2, 0, 0, 256, 256, 255, 255, 255, 255);
-        GlStateManager.disableLighting();
-        GlStateManager.disableFog();
-        framebuffer.unbindFramebuffer();
-        framebuffer.framebufferRender(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i);
-        GlStateManager.enableAlpha();
-        GlStateManager.alphaFunc(516, 0.1F);
-        this.updateDisplay();
-    }
+// Not used, see SplashScreen from client
+//    private void drawSplashScreen(TextureManager textureManagerInstance) throws LWJGLException
+//    {
+//        ScaledResolution scaledresolution = new ScaledResolution(this);
+//        int i = scaledresolution.getScaleFactor();
+//        Framebuffer framebuffer = new Framebuffer(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i, true);
+//        framebuffer.bindFramebuffer(false);
+//        GlStateManager.matrixMode(5889);
+//        GlStateManager.loadIdentity();
+//        GlStateManager.ortho(0.0D, (double)scaledresolution.getScaledWidth(), (double)scaledresolution.getScaledHeight(), 0.0D, 1000.0D, 3000.0D);
+//        GlStateManager.matrixMode(5888);
+//        GlStateManager.loadIdentity();
+//        GlStateManager.translate(0.0F, 0.0F, -2000.0F);
+//        GlStateManager.disableLighting();
+//        GlStateManager.disableFog();
+//        GlStateManager.disableDepth();
+//        GlStateManager.enableTexture2D();
+//        InputStream inputstream = null;
+//
+//        try
+//        {
+//            inputstream = this.mcDefaultResourcePack.getInputStream(LOCATION_MOJANG_PNG);
+//            this.mojangLogo = textureManagerInstance.getDynamicTextureLocation("logo", new DynamicTexture(ImageIO.read(inputstream)));
+//            textureManagerInstance.bindTexture(this.mojangLogo);
+//        }
+//        catch (IOException ioexception)
+//        {
+//            LOGGER.error("Unable to load logo: {}", LOCATION_MOJANG_PNG, ioexception);
+//        }
+//        finally
+//        {
+//            IOUtils.closeQuietly(inputstream);
+//        }
+//
+//        Tessellator tessellator = Tessellator.getInstance();
+//        BufferBuilder bufferbuilder = tessellator.getBuffer();
+//        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+//        bufferbuilder.pos(0.0D, (double)this.displayHeight, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
+//        bufferbuilder.pos((double)this.displayWidth, (double)this.displayHeight, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
+//        bufferbuilder.pos((double)this.displayWidth, 0.0D, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
+//        bufferbuilder.pos(0.0D, 0.0D, 0.0D).tex(0.0D, 0.0D).color(255, 255, 255, 255).endVertex();
+//        tessellator.draw();
+//        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+//        int j = 256;
+//        int k = 256;
+//        this.draw((scaledresolution.getScaledWidth() - 256) / 2, (scaledresolution.getScaledHeight() - 256) / 2, 0, 0, 256, 256, 255, 255, 255, 255);
+//        GlStateManager.disableLighting();
+//        GlStateManager.disableFog();
+//        framebuffer.unbindFramebuffer();
+//        framebuffer.framebufferRender(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i);
+//        GlStateManager.enableAlpha();
+//        GlStateManager.alphaFunc(516, 0.1F);
+//        this.updateDisplay();
+//    }
 
     /**
      * Draw with the WorldRenderer
@@ -1606,7 +1612,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
                 switch (this.objectMouseOver.typeOfHit)
                 {
                     case ENTITY:
-                        this.playerController.attackEntity(this.player, this.objectMouseOver.entityHit);
+                        AttackOrder.sendFixedAttack(this.player, this.objectMouseOver.entityHit, EnumHand.MAIN_HAND);
                         break;
 
                     case BLOCK:
@@ -1626,8 +1632,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
 
                         this.player.resetCooldown();
                 }
-
-                this.player.swingArm(EnumHand.MAIN_HAND);
+                AttackOrder.sendConditionalSwing(this.objectMouseOver, EnumHand.MAIN_HAND);
             }
         }
     }
