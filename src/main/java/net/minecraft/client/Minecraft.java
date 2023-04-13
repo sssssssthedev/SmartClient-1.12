@@ -53,7 +53,6 @@ import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiGameOver;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.GuiIngameMenu;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMemoryErrorScreen;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiNewChat;
@@ -202,6 +201,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import net.sssssssthedev.SmartClient.SmartClient;
+import net.sssssssthedev.SmartClient.ui.mainmenu.MainMenuScreen;
 import net.sssssssthedev.SmartClient.ui.splash.SplashScreen;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
@@ -612,11 +612,11 @@ public class Minecraft implements IThreadListener, ISnooperInfo
 
         if (this.serverName != null)
         {
-            this.displayGuiScreen(new GuiConnecting(new GuiMainMenu(), this, this.serverName, this.serverPort));
+            this.displayGuiScreen(new GuiConnecting(new MainMenuScreen(), this, this.serverName, this.serverPort));
         }
         else
         {
-            this.displayGuiScreen(new GuiMainMenu());
+            this.displayGuiScreen(new MainMenuScreen());
         }
 
         this.renderEngine.deleteTexture(this.mojangLogo);
@@ -1059,14 +1059,14 @@ public class Minecraft implements IThreadListener, ISnooperInfo
 
         if (guiScreenIn == null && this.world == null)
         {
-            guiScreenIn = new GuiMainMenu();
+            guiScreenIn = new MainMenuScreen();
         }
         else if (guiScreenIn == null && this.player.getHealth() <= 0.0F)
         {
             guiScreenIn = new GuiGameOver((ITextComponent)null);
         }
 
-        if (guiScreenIn instanceof GuiMainMenu || guiScreenIn instanceof GuiMultiplayer)
+        if (guiScreenIn instanceof MainMenuScreen || guiScreenIn instanceof GuiMultiplayer)
         {
             this.gameSettings.showDebugInfo = false;
             this.ingameGUI.getChatGUI().clearChatMessages(true);

@@ -22,7 +22,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiDownloadTerrain;
-import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.MapItemRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -81,6 +80,7 @@ import net.minecraft.world.GameType;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldProvider;
 import net.minecraft.world.biome.Biome;
+import net.sssssssthedev.SmartClient.ui.mainmenu.MainMenuScreen;
 import optifine.Config;
 import optifine.CustomColors;
 import optifine.Lagometer;
@@ -2771,9 +2771,9 @@ public class EntityRenderer implements IResourceManagerReloadListener
             }
         }
 
-        if (this.mc.currentScreen instanceof GuiMainMenu)
+        if (this.mc.currentScreen instanceof MainMenuScreen)
         {
-            this.updateMainMenu((GuiMainMenu)this.mc.currentScreen);
+            this.updateMainMenu((MainMenuScreen)this.mc.currentScreen);
         }
 
         if (this.updatedWorld != world)
@@ -2812,7 +2812,7 @@ public class EntityRenderer implements IResourceManagerReloadListener
         }
     }
 
-    private void updateMainMenu(GuiMainMenu p_updateMainMenu_1_)
+    private void updateMainMenu(MainMenuScreen p_updateMainMenu_1_)
     {
         try
         {

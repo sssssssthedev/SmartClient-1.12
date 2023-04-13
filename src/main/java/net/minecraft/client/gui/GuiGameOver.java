@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.sssssssthedev.SmartClient.ui.mainmenu.MainMenuScreen;
 
 public class GuiGameOver extends GuiScreen
 {
@@ -75,7 +76,7 @@ public class GuiGameOver extends GuiScreen
             case 1:
                 if (this.mc.world.getWorldInfo().isHardcoreModeEnabled())
                 {
-                    this.mc.displayGuiScreen(new GuiMainMenu());
+                    this.mc.displayGuiScreen(new MainMenuScreen());
                 }
                 else
                 {
@@ -96,7 +97,7 @@ public class GuiGameOver extends GuiScreen
             }
 
             this.mc.loadWorld((WorldClient)null);
-            this.mc.displayGuiScreen(new GuiMainMenu());
+            this.mc.displayGuiScreen(new MainMenuScreen());
         }
         else
         {

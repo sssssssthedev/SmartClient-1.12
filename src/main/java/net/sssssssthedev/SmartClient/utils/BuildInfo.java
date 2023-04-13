@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class BuildInfo {
 
-    public static String GetFromProperties(String file, String value) {
+    public static String getFromProperties(String file, String value) {
         InputStream inputStream = BuildInfo.class.getResourceAsStream(file);
         Properties properties = new Properties();
         try {
@@ -18,16 +18,16 @@ public class BuildInfo {
         return "Error";
     }
 
-    public static String GetName() {
-        return GetFromProperties("/build.properties", "build.name");
+    public static String getName() {
+        return getFromProperties("/build.properties", "build.name");
     }
 
-    public static String GetVersion() {
-        return GetFromProperties("/build.properties","build.version");
+    public static String getVersion() {
+        return getFromProperties("/build.properties","build.version");
     }
 
-    public static String GetCommit() {
-        return GetFromProperties("/git.properties", "git.commit.id.abbrev");
+    public static String getCommit() {
+        return getFromProperties("/git.properties", "git.commit.id.abbrev");
     }
 
 
