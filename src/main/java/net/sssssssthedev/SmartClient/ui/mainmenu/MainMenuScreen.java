@@ -6,7 +6,6 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.sssssssthedev.SmartClient.utils.BuildInfo;
 import net.sssssssthedev.SmartClient.utils.RenderUtils;
 
