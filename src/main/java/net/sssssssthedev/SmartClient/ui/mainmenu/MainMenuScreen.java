@@ -1,10 +1,12 @@
 package net.sssssssthedev.SmartClient.ui.mainmenu;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.sssssssthedev.SmartClient.utils.BuildInfo;
 import net.sssssssthedev.SmartClient.utils.RenderUtils;
 
@@ -23,7 +25,25 @@ public class MainMenuScreen extends GuiScreen {
     }
 
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        super.mouseClicked(mouseX, mouseY, mouseButton);
+        // Yes I know there is a better way to do this than to hardcode the coords, but i'm to bored it to do it another way
+        ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());
+        // SIngleplayer button
+        if (RenderUtils.isHovered( scaledResolution.getScaledWidth() / 2 - 12 - 32, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, mouseX, mouseY)) {
+            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiWorldSelection(this));
+        }
+        if (RenderUtils.isHovered( scaledResolution.getScaledWidth() / 2 - 12, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, mouseX, mouseY)) {
+            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiMultiplayer(this));
+        }
+        if (RenderUtils.isHovered( scaledResolution.getScaledWidth() / 2 - 12 + 32, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, mouseX, mouseY)) {
+            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+            Minecraft.getMinecraft().displayGuiScreen(new GuiOptions(this, mc.gameSettings));
+        }
+        if (RenderUtils.isHovered( scaledResolution.getScaledWidth() / 2 - 12, scaledResolution.getScaledHeight() / 2, 24, 24, mouseX, mouseY)) {
+            Minecraft.getMinecraft().getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0f));
+            mc.shutdown();
+        }
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {

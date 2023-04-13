@@ -48,4 +48,8 @@ public class RenderUtils {
         glEnable(GL_DEPTH_TEST);
         glPopMatrix();
     }
+
+    public static boolean isHovered(int x, int y, int w, int h, int mouseX, int mouseY) {
+        return (mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h);
+    }
 }
