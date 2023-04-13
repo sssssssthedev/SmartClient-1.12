@@ -4,7 +4,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.util.ResourceLocation;
 import net.sssssssthedev.SmartClient.utils.BuildInfo;
 import net.sssssssthedev.SmartClient.utils.RenderUtils;
@@ -43,5 +42,7 @@ public class MainMenuScreen extends GuiScreen {
         GlStateManager.translate(-(width/2f), -(height/2f), 0);
         drawCenteredString(Minecraft.getMinecraft().fontRendererObj, String.format("%s §c%s", BuildInfo.getName().replace("S", "§cS§f"), BuildInfo.getVersion()), width/2, height/2 - 20 - Minecraft.getMinecraft().fontRendererObj.FONT_HEIGHT/2, -1);
         GlStateManager.popMatrix();
+        drawCenteredString(Minecraft.getMinecraft().fontRendererObj, "§cCopyright (C) sssssss.dev 2022-2023", width / 2, height/2 + 230, -1);
+        drawCenteredString(Minecraft.getMinecraft().fontRendererObj, String.format("§e%s/%s", BuildInfo.getBranch(), BuildInfo.getCommit()), width / 2 + 420, height/2 + 230, -1);
     }
 }

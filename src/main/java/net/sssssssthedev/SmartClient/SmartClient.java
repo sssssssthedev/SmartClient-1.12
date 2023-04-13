@@ -22,8 +22,8 @@ public class SmartClient {
     public ExecutorService executor = Executors.newFixedThreadPool(8);
 
     public void init() {
-        Logger.info(String.format("Starting up %s %s (%s)", BuildInfo.getName(), BuildInfo.getVersion(), BuildInfo.getCommit()));
-        Display.setTitle(String.format("%s %s (%s)", BuildInfo.getName(), BuildInfo.getVersion(), BuildInfo.getCommit()));
+        Logger.info(String.format("Starting up %s %s (%s/%s)", BuildInfo.getName(), BuildInfo.getVersion(), BuildInfo.getBranch(), BuildInfo.getCommit()));
+        Display.setTitle(String.format("%s %s (%s/%s)", BuildInfo.getName(), BuildInfo.getVersion(), BuildInfo.getBranch(), BuildInfo.getCommit()));
         executor.execute(viaMCP);
     }
 

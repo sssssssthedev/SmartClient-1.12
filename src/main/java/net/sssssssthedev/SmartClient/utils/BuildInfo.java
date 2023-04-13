@@ -18,9 +18,7 @@ public class BuildInfo {
         return "Error";
     }
 
-    public static String getName() {
-        return getFromProperties("/build.properties", "build.name");
-    }
+    public static String getName() {return getFromProperties("/build.properties", "build.name");}
 
     public static String getVersion() {
         return getFromProperties("/build.properties","build.version");
@@ -29,6 +27,8 @@ public class BuildInfo {
     public static String getCommit() {
         return getFromProperties("/git.properties", "git.commit.id.abbrev");
     }
+
+    public static String getBranch() { return getFromProperties("/git.properties", "git.branch"); }
 
 
 
