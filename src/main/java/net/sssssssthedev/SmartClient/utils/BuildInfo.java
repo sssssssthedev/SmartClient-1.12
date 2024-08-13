@@ -18,10 +18,10 @@ public class BuildInfo {
         return "Error";
     }
 
-    public static String getName() { return getFromProperties("/build.properties", "build.name");}
+    public static String getName() { return getFromProperties("/build.properties", "name");}
 
     public static String getVersion() {
-        return getFromProperties("/build.properties","build.version");
+        return getFromProperties("/build.properties","version");
     }
 
     public static String getCommit() {

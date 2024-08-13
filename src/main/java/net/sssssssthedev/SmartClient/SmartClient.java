@@ -35,7 +35,7 @@ public class SmartClient {
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            Logger.error(e.getStackTrace());
         }
     };
 }
