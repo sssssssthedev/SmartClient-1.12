@@ -219,7 +219,7 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.opengl.PixelFormat;
 import org.lwjgl.util.glu.GLU;
-import viamcp.utils.AttackOrder;
+import viamcp.fixes.AttackOrder;
 
 public class Minecraft implements IThreadListener, ISnooperInfo
 {

@@ -100,7 +100,7 @@ public class GuiMultiplayer extends GuiScreen
         this.buttonList.add(new GuiButton(3, this.width / 2 + 4 + 50, this.height - 52, 100, 20, I18n.format("selectServer.add")));
         this.buttonList.add(new GuiButton(8, this.width / 2 + 4, this.height - 28, 70, 20, I18n.format("selectServer.refresh")));
         this.buttonList.add(new GuiButton(0, this.width / 2 + 4 + 76, this.height - 28, 75, 20, I18n.format("gui.cancel")));
-        this.buttonList.add(ViaMCP.getInstance().asyncSlider);
+        this.buttonList.add(ViaMCP.INSTANCE.getAsyncVersionSlider());
         this.selectServer(this.serverListSelector.getSelected());
     }
 

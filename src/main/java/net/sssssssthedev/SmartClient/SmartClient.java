@@ -30,8 +30,9 @@ public class SmartClient {
     Runnable viaMCP = () -> {
         try
         {
-            ViaMCP.getInstance().start();
-            ViaMCP.getInstance().initAsyncSlider();
+            ViaMCP.create();
+            ViaMCP.INSTANCE.fixTransactions();
+            ViaMCP.INSTANCE.initAsyncSlider();
         }
         catch (Exception e)
         {

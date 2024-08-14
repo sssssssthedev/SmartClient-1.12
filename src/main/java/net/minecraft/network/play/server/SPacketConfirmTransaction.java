@@ -1,9 +1,12 @@
 package net.minecraft.network.play.server;
 
 import java.io.IOException;
+
+import com.viaversion.viaversion.api.protocol.version.ProtocolVersion;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.INetHandlerPlayClient;
+import vialoadingbase.ViaLoadingBase;
 
 public class SPacketConfirmTransaction implements Packet<INetHandlerPlayClient>
 {
@@ -33,11 +36,14 @@ public class SPacketConfirmTransaction implements Packet<INetHandlerPlayClient>
     /**
      * Reads the raw packet data from the data stream.
      */
-    public void readPacketData(PacketBuffer buf) throws IOException
-    {
-        this.windowId = buf.readUnsignedByte();
-        this.actionNumber = buf.readShort();
-        this.accepted = buf.readBoolean();
+    public void readPacketData(PacketBuffer buf) throws IOException {
+        if (ViaLoadingBase.getInstance().getTargetVersion().newerThanOrEqualTo(ProtocolVersion.v1_17)) {
+            this.windowId = buf.readInt();
+        } else {
+            this.windowId = buf.readUnsignedByte();
+            this.actionNumber = buf.readShort();
+            this.accepted = buf.readBoolean();
+        }
     }
 
     /**
