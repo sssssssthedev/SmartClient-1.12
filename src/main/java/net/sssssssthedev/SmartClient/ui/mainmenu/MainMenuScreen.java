@@ -62,15 +62,15 @@ public class MainMenuScreen extends GuiScreen {
         RenderUtils.drawImage(singleplayer, scaledResolution.getScaledWidth() / 2 - 12 - 32, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, 255);
         RenderUtils.drawImage(multiplayer, scaledResolution.getScaledWidth() / 2 - 12, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, 255);
         RenderUtils.drawImage(settings, scaledResolution.getScaledWidth() / 2 - 12 + 32, scaledResolution.getScaledHeight() / 2 - 30, 24, 24, 255);
-        RenderUtils.drawImage(quit, scaledResolution.getScaledWidth() / 2 - 12, scaledResolution.getScaledHeight() / 2, 24, 24, 255);
-        RenderUtils.drawImage(login, scaledResolution.getScaledWidth() / 14, scaledResolution.getScaledHeight() /2 + 210, 24, 24, 255);
+        RenderUtils.drawImage(quit, scaledResolution.getScaledWidth() / 2 - 12, scaledResolution.getScaledHeight() / 2 - mc.fontRendererObj.FONT_HEIGHT/2, 24, 24, 255);
+        RenderUtils.drawImage(login, scaledResolution.getScaledWidth() / 14, scaledResolution.getScaledHeight() /2 + 210 - mc.fontRendererObj.FONT_HEIGHT/2, 24, 24, 255);
         GlStateManager.pushMatrix();
         GlStateManager.translate(width/2f, height/2f, 0);
         GlStateManager.scale(3, 3, 1);
         GlStateManager.translate(-(width/2f), -(height/2f), 0);
         drawCenteredString(mc.fontRendererObj, String.format("%s §c%s", BuildInfo.getName().replace("S", "§cS§f"), BuildInfo.getVersion()), width/2, height/2 - 20 - mc.fontRendererObj.FONT_HEIGHT/2, -1);
         GlStateManager.popMatrix();
-        drawCenteredString(mc.fontRendererObj, "§cCopyright (C) sssssss.dev 2023-2024", width / 2, height/2 + 230, -1);
-        drawCenteredString(mc.fontRendererObj, String.format("§e%s/%s", BuildInfo.getBranch(), BuildInfo.getCommit()), width / 2 + 420, height/2 + 230, -1);
+        drawCenteredString(mc.fontRendererObj, "§cCopyright (C) sssssss.dev 2023-2024", width / 2, height/2 + 230 - mc.fontRendererObj.FONT_HEIGHT/2, -1);
+        drawCenteredString(mc.fontRendererObj, String.format("§e%s/%s", BuildInfo.getBranch(), BuildInfo.getCommit()), width / 2 + 420, height/2 + 230 - mc.fontRendererObj.FONT_HEIGHT/2, -1);
     }
 }

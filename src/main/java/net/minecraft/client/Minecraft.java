@@ -201,6 +201,8 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.ISaveHandler;
 import net.minecraft.world.storage.WorldInfo;
 import net.sssssssthedev.SmartClient.SmartClient;
+import net.sssssssthedev.SmartClient.providers.AltsProvider;
+import net.sssssssthedev.SmartClient.ui.alts.AltsScreen;
 import net.sssssssthedev.SmartClient.ui.mainmenu.MainMenuScreen;
 import net.sssssssthedev.SmartClient.ui.splash.SplashScreen;
 import org.apache.commons.io.Charsets;
@@ -3283,6 +3285,9 @@ public class Minecraft implements IThreadListener, ISnooperInfo
 
     public Session getSession()
     {
+        if (AltsProvider.getInstance().getSession() != null) {
+            return AltsProvider.getInstance().getSession();
+        }
         return this.session;
     }
 
